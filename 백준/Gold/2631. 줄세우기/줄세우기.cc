@@ -28,7 +28,7 @@ int main()
 				standard = max(standard, length[i]);
 			}
 		}
-	}
+	} // LIS 알고리즘
 
 	cout << N - standard;
 }
