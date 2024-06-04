@@ -26,3 +26,7 @@
 
  <p>The rook art, exactly as shown below, with no extra blank spaces. In particular, a line must not end with a blank space.</p>
 
+### 문제 풀이
+
+ <p>답 그대로 출력을 하면되지만 주의해야할 사항이 역슬래쉬를 쓰기위해서는 한번 더 역슬래쉬를 쓰면된다.</p>
+
