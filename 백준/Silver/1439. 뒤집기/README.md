@@ -41,4 +41,5 @@
 
  <p>연속된 하나 이상의 숫자를 잡고 모두 뒤집는 문제이기 때문에 0에서 1, 1에서 0으로 바뀔 때마다 각각 변수에서 카운트를 해주면 된다. 그래서 카운트 값들 중에서 최솟값을 출력하면 된다.</p>
 
-![화면 캡처 2024-06-06 010657](https://github.com/denise030261/BaekjoonProblem/assets/83278071/02579116-dd96-4486-957c-4b5ee18fff26)
+![백준 뒤집기 풀이 사진](https://github.com/denise030261/BaekjoonProblem/assets/83278071/e44649d9-6724-432e-924b-fa8add9e149d)
+
