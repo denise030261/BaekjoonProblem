@@ -36,3 +36,7 @@
 
 <p>각 테스트 케이스 사이에는 빈 줄을 하나 출력한다.</p>
 
+### 문제 풀이
+ <p> 집합을 받아서 DFS를 통해 집합에서 수를 고를 수 있는 경우를 출력한다. 이 때 재귀의 현재 위치도 파악하면서 DFS로 문제를 푼다</p>
+
+![KakaoTalk_20240625_233248233](https://github.com/denise030261/BaekjoonProblem/assets/83278071/f6f56a43-7fc6-4eaf-8edf-7bf9581ce9a9)
