@@ -31,5 +31,5 @@
 ### 문제 풀이
 
  <p> DP 문제로 아래에 있는 그림과 같이 표현하면 두 문자열에 문자가 같으면 왼쪽, 위에 있는 값에 1을 더해준다. 만약에 다르면 왼쪽에 있는 값이나 위쪽에 있는 값 중에 최댓값을 골라 배정한다. 그렇게 하여 마지막까지 구한 값이 최종답이다.</p>
-![KakaoTalk_20240628_190901590](https://github.com/denise030261/BaekjoonProblem/assets/83278071/9439b6f6-3534-4082-8cf0-c2e83aabb2eb)
+![KakaoTalk_20240628_190901590](https://github.com/denise030261/BaekjoonProblem/assets/83278071/b847b0f1-2dca-492c-9039-68dd897ee14d)
 
