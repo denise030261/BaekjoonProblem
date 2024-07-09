@@ -19,20 +19,14 @@ int main()
         int plus = 0;
         for (int j = 0; j < N; j++) 
         {
-            if (arr[i] == plus) 
+            if (arr[i] == plus && answer[j]==0)
             {
-                if (!answer[j]) 
-                {
-                    answer[j] = i + 1;
-                    break;
-                }
+                answer[j] = i + 1;
+                break;
             }
-            else 
+            else if(answer[j] == 0)
             {
-                if (!answer[j]) 
-                {
-                    plus++;
-                }
+                plus++;
             }
         }
     }
