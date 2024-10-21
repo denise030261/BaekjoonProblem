@@ -160,5 +160,7 @@
 
 <p>따라서 39354를 return 해야 합니다.</p>
 
+### 문제 풀이
 
+<p>이 문제는 limit의 크기가 크기 때문에 이분탐색을 통해서 조건에 맞게 limit의 크기를 구해주면 된다.</p>
 > 출처: 프로그래머스 코딩 테스트 연습, https://school.programmers.co.kr/learn/challenges
