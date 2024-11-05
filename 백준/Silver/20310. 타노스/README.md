@@ -28,3 +28,6 @@
 
  <p><mjx-container class="MathJax" jax="CHTML" style="font-size: 109%; position: relative;"> <mjx-math class="MJX-TEX" aria-hidden="true"><mjx-msup><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D446 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: 0.363em; margin-left: 0.052em;"><mjx-mo class="mjx-var" size="s"><mjx-c class="mjx-c2032"></mjx-c></mjx-mo></mjx-script></mjx-msup></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>S</mi><mo data-mjx-alternate="1">′</mo></msup></math></mjx-assistive-mml><span aria-hidden="true" class="no-mathjax mjx-copytext">$S'$</span></mjx-container>로 가능한 문자열 중 사전순으로 가장 빠른 것을 출력한다.</p>
 
+### 문제 풀이
+
+ <p>이 문제는 0과 1을 반으로 줄이는 대신에 재배열을 하면 안된다. 그리고 사전순으로 가장 빠른 것을 출력해야하기 때문에 앞에 0이 먼저 와야한다. 즉, 1은 앞에 있는 위치부터 1의 개수의 반만큼 지우고 0은 뒤에 있는 위치부터 0의 개수의 반만큼 지우고 출력하면 된다.</p>
