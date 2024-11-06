@@ -14,7 +14,7 @@ int main()
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 	int N, A, B, C;
 	vector<int> D;
-	long long int answer = 0;
+	int answer = 0;
 	cin >> N;
 	cin >> A >> B;
 	cin >> C;
@@ -35,7 +35,7 @@ int main()
 	{
 		sumToppingsCost += B;
 		sumToppings += D[i];
-		long long int calorie = (C + sumToppings) / (A + sumToppingsCost);
+		int calorie = (C + sumToppings) / (A + sumToppingsCost);
 		if (answer <= calorie)
 		{
 			answer = calorie;
