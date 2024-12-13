@@ -3,84 +3,73 @@
 #include <algorithm>
 
 using namespace std;
-string slice(string str, int term)
-{
-    int year = stoi(str.substr(0,4));
-    int month = stoi(str.substr(5,2));
-    int date = stoi(str.substr(8,2));
-    
-    date--;
-    if(date<=0)
-    {
-        date+=28;
+
+string calculateExpirationDate(string date, int termMonths) {
+    int year = stoi(date.substr(0, 4));
+    int month = stoi(date.substr(5, 2));
+    int day = stoi(date.substr(8, 2)) - 1; 
+
+    if (day <= 0) {
+        day += 28;
         month--;
     }
-    if(month<=0)
-    {
-        month+=12;
+
+    if (month <= 0) {
+        month += 12;
         year--;
     }
-    
-    month+=term;
-    if(month>12)
-    {
-        year+=month/12;
-        month-=12*(month/12);
-    }
-    if(month<=0)
-    {
-        month+=12;
-        year--;
-    }
-    
-    string str_year = to_string(year);
-    string str_month = to_string(month);
-    string str_date = to_string(date);
-    
-    if(month<10)
-        str_month = '0'+to_string(month);
-    if(date<10)
-        str_date = '0'+to_string(date);
-    
-    return str_year+'.'+str_month+'.'+str_date;
-} 
 
-bool Break(string today, string term)
-{
-    if(stoi(today.substr(0,4))>stoi(term.substr(0,4)))
-        return true;
-    else if(stoi(today.substr(0,4))<stoi(term.substr(0,4)))
-        return false;
-    else if(stoi(today.substr(5,2))>stoi(term.substr(5,2)))
-        return true;
-    else if(stoi(today.substr(5,2))<stoi(term.substr(5,2)))
-        return false;
-    else if(stoi(today.substr(8,2))>stoi(term.substr(8,2)))
-        return true;
+    month += termMonths;
+    if (month > 12) {
+        year += month / 12;
+        month %= 12;
+        if (month == 0) {
+            month = 12;
+            year--;
+        }
+    }
 
-    return false;
+    string strYear = to_string(year);
+    string strMonth = (month < 10 ? "0" : "") + to_string(month);
+    string strDay = (day < 10 ? "0" : "") + to_string(day);
+
+    return strYear + "." + strMonth + "." + strDay;
+}
+
+bool isExpired(const string& today, const string& expirationDate) {
+    if (stoi(today.substr(0, 4)) > stoi(expirationDate.substr(0, 4)))
+        return true;
+    if (stoi(today.substr(0, 4)) < stoi(expirationDate.substr(0, 4)))
+        return false;
+
+    if (stoi(today.substr(5, 2)) > stoi(expirationDate.substr(5, 2)))
+        return true;
+    if (stoi(today.substr(5, 2)) < stoi(expirationDate.substr(5, 2)))
+        return false;
+
+    return stoi(today.substr(8, 2)) > stoi(expirationDate.substr(8, 2));
 }
 
 vector<int> solution(string today, vector<string> terms, vector<string> privacies) {
     vector<int> answer;
-    for(int i=0;i<privacies.size();i++)
-    {
-        string date = privacies[i].substr(0,10);
-        char info = privacies[i].back();
-        
-        for(int j=0;j<terms.size();j++)
-        {
-            if(terms[j][0]==info)
-            {
-                privacies[i] = slice(privacies[i],stoi(terms[j].substr(terms[j].find(" ")+1)));
-                break;
-            }
-        }
-        
-        if(Break(today,privacies[i]))
-        {
-            answer.push_back(i+1);
+    
+    unordered_map<char, int> termMap;
+    for (const string& term : terms) {
+        char type = term[0];
+        int duration = stoi(term.substr(term.find(" ") + 1));
+        termMap[type] = duration;
+    }
+
+    for (int i = 0; i < privacies.size(); i++) {
+        string date = privacies[i].substr(0, 10);
+        char type = privacies[i].back();
+
+        string expirationDate = calculateExpirationDate(date, termMap[type]);
+
+        if (isExpired(today, expirationDate)) {
+            answer.push_back(i + 1);
         }
     }
+
     return answer;
 }
