@@ -39,7 +39,7 @@ int main()
 		v.push_back(num);
 	}
 
-	dfs(0,0,1000000, 1);
+	dfs(0,0,1000001, 1);
 
 	cout << answer;
 }
