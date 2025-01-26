@@ -30,3 +30,8 @@
 
  <p>첫째 줄에 좋은 단어의 수를 출력한다.</p>
 
+### 문제 풀이
+
+ <p>같은 글자끼리 아치형 곡선을 그어서 교차하지 않도록 해야한다. 즉, 첫번째 사진과 같다. 문자열의 문자들을 스택에 쌓으면서 연속으로 같은 문자들을 만날 때 없애는 방식으로 진행하려고 한다. 끝까지 문자들을 쌓을 때 스택에 아무것도 없으면 교차하지 않는다. ![image](https://github.com/user-attachments/assets/d93f1ce8-4592-4dbd-94a4-497cbd870db1) ![image](https://github.com/user-attachments/assets/21ab878e-040b-4f8f-a269-911b23d7f182)
+
+</p>
