@@ -8,7 +8,7 @@ int main()
 {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 	int N;
-	int result = 0;
+	int result = 1;
 	vector<int> v;
 	int dp[1000] = { 0, };
 	cin >> N;
@@ -33,5 +33,5 @@ int main()
 		}
 	}
 
-	cout << (N == 1 ? 1 : result);
+	cout << result;
 }
