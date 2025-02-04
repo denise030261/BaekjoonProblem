@@ -8,40 +8,36 @@ int main()
 {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 	int N, S;
-	vector<int> v;
+	int arr[100001] = { 0, };
 	cin >> N >> S;
 
-	int standard = 0;
+	int start = 0;
+	int end = 0;
+	int answer = INT_MAX;
 	int sum = 0;
 	int length = 0;
-	int answer = INT_MAX;
-	int num = 0;
 
 	for (int i = 0; i < N; i++)
 	{
-		cin >> num;
-		v.push_back(num);
+		cin >> arr[i];
+	}
 
-		sum += num;
-		length++;
-		if (sum >= S)
+	while (start <= end && end<=N)
+	{
+		if(sum>=S)
+			answer = min(length, answer);
+
+		if (sum < S)
 		{
-			answer = min(answer, length);
-			for (int j = standard; j < i; j++)
-			{
-				standard++;
-				sum -= v[j];
-				length--;
-
-				if (sum >= S)
-				{
-					answer = min(answer, length);
-				}
-				else
-				{
-					break;
-				}
-			}
+			sum += arr[end];
+			length++;
+			end++;
+		}
+		else
+		{		
+			sum -= arr[start];
+			start++;
+			length--;
 		}
 	}
 
