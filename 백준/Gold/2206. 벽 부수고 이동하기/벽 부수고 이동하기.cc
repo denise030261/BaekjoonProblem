@@ -43,23 +43,6 @@ int main()
 		int y = road.front().second.second; 
 		road.pop();
 
-		/*cout << '\n' << "-----------------------------------------------------\n";
-		for (int i = 0; i < N; i++)
-		{
-			for (int j = 0; j < M; j++)
-			{
-				if (i == y && j == x)
-				{
-					cout << 2;
-				}
-				else
-				{
-					cout << map[i][j];
-				}
-			}
-			cout << '\n';
-		}*/
-
 		if (x == M - 1 && y == N - 1)
 		{
 			answer = min(answer, total);
