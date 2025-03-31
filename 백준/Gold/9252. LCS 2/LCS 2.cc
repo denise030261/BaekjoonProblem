@@ -1,59 +1,53 @@
 #include <iostream>
-#include <string>
-using namespace std;
+#include<algorithm> 
+#include<string>
 
-int DP[1001][1001];
+using namespace std;
 
 int main()
 {
-	ios::sync_with_stdio(false);
-	cin.tie(NULL); cout.tie(NULL);
+	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+	string str1, str2;
+	cin >> str1 >> str2;
 
-	string A, B;
-	cin >> A >> B;
-
-	int N = A.size();
-	int M = B.size();
-	for (int i = 1; i <= N; ++i)
+	int dp[1001][1001] = { 0, };
+	for (int i = 1; i <= str1.length(); i++)
 	{
-		for (int j = 1; j <= M; ++j)
+		for (int j = 1; j <= str2.length(); j++)
 		{
-			if (A[i - 1] == B[j - 1])
+			if (str1[i-1] == str2[j-1])
 			{
-				DP[i][j] = DP[i - 1][j - 1] + 1;
+				dp[i][j] = dp[i - 1][j - 1] + 1;
 			}
 			else
 			{
-				DP[i][j] = max(DP[i][j - 1], DP[i - 1][j]);
+				dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
 			}
 		}
 	}
 
-	string Solution;
-
-	int i = N;
-	int j = M;
+	string ans;
+	int i = str1.length();
+	int j = str2.length();
 	while (i > 0 && j > 0)
 	{
-		if (DP[i][j] == DP[i - 1][j])
+		if (str1[i - 1] == str2[j - 1])
 		{
-			--i;
+			ans += str1[i - 1];  
+			i--;
+			j--;
 		}
-		else if (DP[i][j] == DP[i][j - 1])
+		else if (dp[i - 1][j] > dp[i][j - 1])
 		{
-			--j;
+			i--;  
 		}
 		else
 		{
-			Solution.push_back(A[i - 1]);
-			--i;
-			--j;
+			j--;  
 		}
 	}
 
-	cout << Solution.size() << '\n';
-	for (int i = Solution.size() - 1; i >= 0; --i)
-	{
-		cout << Solution[i];
-	}
+	reverse(ans.begin(),ans.end());
+	cout << ans.length() << '\n';
+	cout << ans;
 }
