@@ -31,7 +31,7 @@ int solution(vector<int> queue1, vector<int> queue2) {
     
     while(q1Sum!=q2Sum)
     {
-        if(q1.size()*6<answer || maxNum>(q1Sum+q2Sum-maxNum))
+        if( (queue1.size() + queue2.size()) * 2<answer)
         {
             answer=-1;
             break;
