@@ -1,70 +1,57 @@
 #include <iostream>
 #include <vector>
-#include <queue>
 #include <cstring>
+#include <queue>
 
 using namespace std;
 
-int N, M;
-vector<int> v[10001];
-bool visit[10001];
-int result[10001];
-int mm = 0;
+int main()
+{
+	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+	int N, M;
+	vector<int> v[10001];
+	int answers[10001] = { 0, };
+	int answer = 0;
+	bool visited[10001] = { 0, };
 
-void bfs(int n) {
-    queue<int> q;
-    int count = 1;
+	cin >> N >> M;
+	for (int i = 0; i < M; i++)
+	{
+		int A, B;
+		cin >> A >> B;
+		v[B].push_back(A);
+	}
 
-    q.push(n);
-    visit[n] = true;
+	for (int i = 1; i <= N; i++)
+	{
+		queue<int> q;
+		q.push(i);
 
-    while (!q.empty()) {
-        int a = q.front();
+		answers[i]++;
+		visited[i] = true;
+		while (!q.empty())
+		{
+			int current = q.front();
+			q.pop();
 
-        q.pop();
+			for (int j = 0; j < v[current].size(); j++)
+			{
+				if (!visited[v[current][j]])
+				{
+					visited[v[current][j]] = true;
+					answers[i]++;
+					q.push(v[current][j]);
+				}
+			}
+		}
 
-        for (int i = 0; i < v[a].size(); i++) {
-            int na = v[a][i];
+		answer = max(answer, answers[i]);
+		memset(visited, 0, sizeof(visited));
+	}
 
-            if (visit[na]) continue;
-
-            q.push(na);
-            visit[na] = true;
-            count++;
-        }
-    }
-
-    result[n] = count;
-    mm = max(count, mm);
-}
-
-void solution() {
-    for (int i = 1; i <= N; i++) {
-        memset(visit, false, sizeof(visit));
-
-        bfs(i);
-    }
-
-    for (int i = 1; i <= N; i++) {
-        if (result[i] == mm) {
-            cout << i << " ";
-        }
-    }
-}
-
-int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL); cout.tie(NULL);
-
-    cin >> N >> M;
-
-    int a, b;
-    for (int i = 0; i < M; i++) {
-        cin >> a >> b;
-        v[b].push_back(a);
-    }
-
-    solution();
-
-    return 0;
+	for (int i = 1; i <= N; i++)
+	{
+		if (answer == answers[i])
+			cout << i << ' ';
+	}
 }
