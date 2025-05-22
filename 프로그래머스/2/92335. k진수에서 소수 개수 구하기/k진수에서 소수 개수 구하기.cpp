@@ -7,6 +7,17 @@
 
 using namespace std;
 
+bool isPrime(long long num)
+{
+    for(long long i=2;i*i<=num;i++)
+    {
+        if(num%i==0)
+            return false;
+    }
+    
+    return true;
+}
+
 int solution(int n, int k) {
     int answer = 0;
     string str="";
@@ -30,18 +41,8 @@ int solution(int n, int k) {
     }
     
     for(int i=0;i<v.size();i++)
-    {
-        bool possible=true;
-        for(long long j=2;j<(long long)sqrt(v[i])+1;j++)
-        {
-            if(v[i]%j==0)
-            {
-                possible=false;
-                break;
-            }
-        }
-        
-        if(possible)
+    {  
+        if(isPrime(v[i]))
             answer++;
     }
 
