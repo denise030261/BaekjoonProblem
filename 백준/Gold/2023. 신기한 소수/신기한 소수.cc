@@ -1,12 +1,8 @@
 #include <iostream>
-#include <vector>
-#include <algorithm>
-#include <cstring>
 #include <string>
 
 using namespace std;
 
-vector<int> v;
 int N;
 
 bool isPrime(int num)
@@ -32,17 +28,13 @@ void dfs(int length, string result)
 	{
 		if (length == 0 && i == 1)
 			continue;
-		//cout << i << " : ";
 
 		string change = result;
 		string str = to_string(i);
 		change += str;
 
-		//cout << change << '\n';
-
 		if (isPrime(stoi(change)))
 		{
-			//cout << "change is " << change << '\n';
 			dfs(length + 1, change);
 		}
 	}
