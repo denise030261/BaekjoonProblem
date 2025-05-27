@@ -5,8 +5,6 @@
 using namespace std;
 
 int map[10][10] = { 0, };
-int last_x;
-int last_y;
 bool clear = false;
 
 void rowcheck(int x, int y, bool(&check)[10])
@@ -97,12 +95,6 @@ int main()
 		for (int j = 0; j < 9; j++)
 		{
 			cin >> map[i][j];
-
-			if (map[i][j] == 0)
-			{
-				last_x = j;
-				last_y = i;
-			}
 		}
 	}
 
