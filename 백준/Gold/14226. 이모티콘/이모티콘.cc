@@ -5,7 +5,7 @@
 
 using namespace std;
 
-bool visited[100001][1001] = {0,};
+bool visited[10001][1001] = {0,};
 
 int main()
 {
