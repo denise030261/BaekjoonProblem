@@ -21,7 +21,7 @@ int main()
 
 	for (int i = 3; i <= N; i++)
 	{
-		for (int j = 2; j <= i; j++)
+		for (int j = 2; j <= K; j++)
 		{
 			dp[i][j] = (dp[i - 1][j - 1] + dp[i - 1][j]) % 10007;
 		}
