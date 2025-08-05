@@ -39,20 +39,17 @@ int main()
 		int order = orders[i];
 		int next_x = x + dx[order-1];
 		int next_y = y + dy[order-1];
-		//cout << "명령어의 위치 : " << next_x << ' ' << next_y << ' ';
 		if (!(next_x >= 0 && next_x < N && next_y >= 0 && next_y < M))
 		{
 			continue;
-		} // 지도에서 벗어나면 다음 명령어로
+		} 
 		
 		x = next_x;
 		y = next_y;
 
 		int dicePreLoc[6] = { 0, };
-		//cout << "주사위 명령어의 이전 위치 : ";
 		for (int j = 0; j < 6; j++)
 		{
-			//cout << diceLoc[j] << ' ';
 			dicePreLoc[j] = diceLoc[j];
 		}
 
@@ -84,13 +81,6 @@ int main()
 			diceLoc[4] = dicePreLoc[5];
 			diceLoc[5] = dicePreLoc[1];
 		} // 남
-
-		/*cout << "주사위 명령어의 이후 위치 : ";
-		for (int j = 0; j < 6; j++)
-		{
-			cout << diceLoc[j] << ' ';
-		}
-		cout << map[x][y] << '\n';*/
 
 		if(map[x][y]!=0)
 		{
