@@ -26,83 +26,29 @@ int main()
 	sort(pos.begin(), pos.end(),greater<int>());
 	sort(neg.begin(),neg.end());
 
-	bool used[50] = { 0, };
-	for (int i = 0; i < pos.size(); i++)
+	for (int i = 0; i < (int)pos.size()-1; i+=2)
 	{
-		if (used[i])
+		if (pos[i + 1] == 1)
 		{
-			continue;
-		}
-
-		int select = -1;
-		int difference = 0;
-		for (int j = i + 1; j < pos.size(); j++)
-		{
-			if ((pos[i] + pos[j] < pos[i] * pos[j]) && !used[j])
-			{
-				if ((select != -1 && abs((pos[i] + pos[j]) - (pos[i] * pos[j])) > difference)
-					|| select == -1)
-				{
-					select = j;
-					difference = abs((pos[i] + pos[j]) - (pos[i] * pos[j]));
-				}
-			}
-		}
-
-		used[i] = true;
-		if (select == -1)
-		{
-			answer += pos[i];
-			//cout << answer << '\n';
+			answer += pos[i] + pos[i + 1];
 		}
 		else
 		{
-			used[select] = true;
-			answer += pos[i] * pos[select];
-			//cout << pos[i] * pos[select] << ' ' << answer << '\n';
+			answer += pos[i] * pos[i + 1];
 		}
 	}
-
-	for (int i = 0; i < neg.size(); i++)
+	if (pos.size() % 2 == 1)
 	{
-		used[i] = false;
+		answer += pos[pos.size() - 1];
 	}
 
-	for (int i = 0; i < neg.size(); i++)
+	for (int i = 0; i < (int)neg.size() - 1; i += 2)
 	{
-		if (used[i])
-		{
-			continue;
-		}
-
-		int select = -1;
-		int difference = 0;
-		for (int j = i + 1; j < neg.size(); j++)
-		{
-			if ((neg[i] + neg[j] < neg[i] * neg[j]) && !used[j])
-			{
-				if ((select != -1 && abs((neg[i] + neg[j]) - (neg[i] * neg[j])) > difference)
-					|| select == -1)
-				{
-					select = j;
-					difference = abs((neg[i] + neg[j]) - (neg[i] * neg[j]));
-				}
-			}
-		}
-
-		used[i] = true;
-		if (select == -1)
-		{
-			answer += neg[i];
-			//cout << answer << '\n';
-		}
-		else
-		{
-			used[select] = true;
-			answer += neg[i] * neg[select];
-			//cout << neg[i] * neg[select] << ' ' << answer << '\n';
-		}
+		answer += neg[i] * neg[i + 1];
 	}
-
+	if (neg.size() % 2 == 1)
+	{
+		answer += neg[neg.size() - 1];
+	}
 	cout << answer;
 }
