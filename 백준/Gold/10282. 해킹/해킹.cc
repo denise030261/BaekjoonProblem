@@ -51,14 +51,12 @@ int main()
 		int answerTime = 0;
 		for (int i = 1; i <= n; i++)
 		{
-			//cout << times[i] << ' ';
 			if (times[i] != INT_MAX)
 			{
 				answerNum++;
 				answerTime = max(answerTime, times[i]);
 			}
 		}
-		//cout << '\n';
 		cout << answerNum << ' ' << answerTime << '\n';
 
 		T--;
