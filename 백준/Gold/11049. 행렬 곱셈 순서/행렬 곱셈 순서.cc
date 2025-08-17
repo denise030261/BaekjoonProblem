@@ -8,8 +8,8 @@ int main()
 {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 	int N;
-	int dp[502][502] = { 0, };
-	int matrix[502][2] = { 0, };
+	int dp[501][501] = { 0, };
+	int matrix[501][2] = { 0, };
 
 	cin >> N;
 	for (int i = 0; i < N; i++)
@@ -25,7 +25,7 @@ int main()
 		for (int j = 1; i+j <= N; j++)
 		{
 			dp[j][i + j] = INT_MAX;
-			for (int k = j; k <= i+j; k++)
+			for (int k = j; k < i+j; k++)
 			{
 				dp[j][i+j] = min(dp[j][i+j], dp[j][k] + dp[k + 1][i+j] + matrix[j][0] * matrix[k][1] * matrix[i + j][1]);
 			}
