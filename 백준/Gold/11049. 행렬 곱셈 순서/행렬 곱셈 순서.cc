@@ -8,8 +8,8 @@ int main()
 {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 	int N;
-	int dp[1000][1000] = { 0, };
-	int matrix[1000][2] = { 0, };
+	int dp[502][502] = { 0, };
+	int matrix[502][2] = { 0, };
 
 	cin >> N;
 	for (int i = 0; i < N; i++)
