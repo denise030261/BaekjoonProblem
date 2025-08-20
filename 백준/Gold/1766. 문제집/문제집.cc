@@ -30,11 +30,10 @@ int main()
 		}
 	}
 
-	vector<int> answer;
 	while (!pq.empty())
 	{
 		int num = pq.top();
-		answer.push_back(num);
+		cout << num << ' ';
 		pq.pop();
 
 		for (int i = 0; i < edge[num].size(); i++)
@@ -45,10 +44,5 @@ int main()
 				pq.push(edge[num][i]);
 			}
 		}
-	}
-
-	for (int i = 0; i < answer.size(); i++)
-	{
-		cout << answer[i] << ' ';
 	}
 }
