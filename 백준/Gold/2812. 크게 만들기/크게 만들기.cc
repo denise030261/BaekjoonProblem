@@ -9,7 +9,6 @@ int main()
 {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 	int N, M;
-	vector<int> q[10];
 	stack<int> st;
 	string str;
 	cin >> N >> M;
