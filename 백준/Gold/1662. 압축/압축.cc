@@ -11,7 +11,7 @@ int main()
 	stack<int> st;
 	cin >> str;
 
-	long int sum = 0;
+	int sum = 0;
 	for (int i = 0; i < str.length(); i++)
 	{
 		if (str[i] != ')')
@@ -35,19 +35,16 @@ int main()
 		}
 		else
 		{
-			long int num = 0;
+			int num = 0;
 			while (st.top() != -1)
 			{
-				//cout << st.top()<<" : " << st.top() << ' ';
 				num += st.top();
 				st.pop();
 			}
 			st.pop();
-			//cout << st.top() << ' ';
 			num *= st.top();
 			st.pop();
 			st.push(num);
-			//cout << num << '\n';
 		}
 	}
 
