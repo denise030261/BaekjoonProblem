@@ -1,55 +1,68 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
+#include <cstring>
 
 using namespace std;
-int n;
-int visited[100001];
-vector<pair<int, int> >node[100001];
-int answer = -1, maxnode = 0;
 
-void dfs(int current, int dist) 
+int answer = 0;
+int far = 0;
+bool visited[100001] = { 0, };
+vector<pair<int, int>> edges[100001];
+
+void dfs(int node,int sum)
 {
-	visited[current] = 1;
-	if (answer < dist) 
+	if (sum > answer)
 	{
-		answer = dist;
-		maxnode = current;
+		far = node;
+		answer = sum;
 	}
-	for (int i = 0; i < node[current].size(); i++) 
+
+	for (int i = 0; i < edges[node].size(); i++)
 	{
-		if (visited[node[current][i].first] == 1)
-			continue;
-		dfs(node[current][i].first, dist + node[current][i].second);
+		if (!visited[edges[node][i].first])
+		{
+			visited[edges[node][i].first] = true;
+			dfs(edges[node][i].first, sum + edges[node][i].second);
+		}
 	}
 }
 
+
 int main() 
 {
-	int N;
-	cin >> N;
+	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+	int V;
+	cin >> V;
 
-	for (int i = 0; i < N; i++)
+	for (int i = 0; i < V; i++)
 	{
-		int V;
-		cin >> V;
+		int node;
+		int next, edge;
+		cin >> node;
 
-		while (1)
+		cin >> next;
+		if (next == -1)
 		{
-			int edge, cost;
-			cin >> edge;
-			if (edge == -1)
-				break;
-			else
+			continue;
+		}
+		else
+		{
+			while (next != -1)
 			{
-				cin >> cost;
-				node[V].push_back({ edge,cost });
+				cin >> edge;
+				edges[node].push_back({ next,edge });
+				cin >> next;
 			}
 		}
 	}
+
+	visited[1] = true;
 	dfs(1, 0);
-	fill(visited, visited + 100001, 0);
-	answer = -1;
-	dfs(maxnode, 0);
-	cout << answer << endl;
+	memset(visited, 0, sizeof(visited));
+
+	answer = 0;
+	visited[far] = true;
+	dfs(far, 0);
+
+	cout << answer;
 }
