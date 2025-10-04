@@ -1,5 +1,4 @@
 #include <iostream>
-#include <climits>
 #include <vector>
 
 using namespace std;
@@ -8,8 +7,8 @@ int main()
 {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 	int K; // 참외의 개수
-	int maxHeight = 0, minHeight = INT_MAX;
-	int maxWidth = 0, minWidth = INT_MAX;
+	int maxHeight = 0;
+	int maxWidth = 0;
 	vector<pair<int, int>> v;
 
 	cin >> K;
@@ -21,12 +20,10 @@ int main()
 		if (num == 1 || num == 2)
 		{
 			maxWidth = max(maxWidth, dist);
-			minWidth = min(minWidth, dist);
 		}
 		else
 		{
 			maxHeight = max(maxHeight, dist);
-			minHeight = min(minHeight, dist);
 		}
 		v.push_back({ num,dist });
 	}
