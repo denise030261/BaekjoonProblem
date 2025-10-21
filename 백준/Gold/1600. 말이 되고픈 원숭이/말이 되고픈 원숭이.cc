@@ -3,7 +3,7 @@
 #include <queue>
 
 using namespace std;
-// 맨 왼쪽 위 -> 맨 오른쪽 아래
+
 int main()
 {
 	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
@@ -56,7 +56,6 @@ int main()
 					{
 						costMap[next_x][next_y][horseCost - 1] = cost + 1;
 						pq.push({ {-(cost + 1),-(horseCost - 1)} ,{next_x,next_y} });
-						//cout << cost + 1 << ' ' << horseCost << ' ' << next_x << ' ' << next_y << '\n';
 					}
 				}
 			}
@@ -72,7 +71,6 @@ int main()
 				{
 					costMap[next_x][next_y][horseCost] = cost + 1;
 					pq.push({ {-(cost + 1),-horseCost} ,{next_x,next_y} });
-					//cout << cost + 1 << ' ' << horseCost << ' ' << next_x << ' ' << next_y << '\n';
 				}
 			}
 		}
