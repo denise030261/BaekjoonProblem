@@ -28,7 +28,6 @@ int main()
 	int answer = INT_MAX;
 	for (int i = 0; i < N; i++)
 	{
-		//cout << "------------------------------------------------------\n";
 		int sum = 0;
 		bool correct = true;
 		int height = -1;
@@ -39,7 +38,6 @@ int main()
 				height = arr[j];
 			}
 			sum += height;
-			//cout << height << ' ' << sum << '\n';
 		}
 
 		if (height > v[i].second)
@@ -55,7 +53,6 @@ int main()
 				height = arr[j];
 			}
 			sum += height;
-			//cout << height << ' ' << sum << '\n';
 		}
 		if (height > v[i].second)
 		{
@@ -65,7 +62,6 @@ int main()
 		if(correct)
 		{
 			answer = min(answer, sum+v[i].second);
-			//cout << "answer is " << answer << '\n';
 		}
 	}
 
