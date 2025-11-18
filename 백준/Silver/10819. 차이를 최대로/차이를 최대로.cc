@@ -20,24 +20,14 @@ void dfs(int length)
 		{
 			sum += abs(v[i] - v[i + 1]);
 		}
-		/*if (answer < sum)
-		{
-			for (int i = 0; i < N; i++)
-			{
-				cout << v[i] << ' ';
-			}
-			cout << '\n';
-		}*/
 		answer = max(answer, sum);
 		return;
 	}
 
 	for (int i = 0; i < N; i++)
 	{
-		//cout << 1;
 		if (!visited[i])
 		{
-			//cout << 2;
 			visited[i] = true;
 			v.push_back(arr[i]);
 			dfs(v.size());
