@@ -10,7 +10,7 @@ int answer = 0;
 
 void move_board(vector<vector<int>>& map, int dir)
 {
-    if (dir == 0) 
+    if (dir == 0) // 위
     { 
         for (int j = 0; j < N; j++) 
         { 
@@ -18,34 +18,36 @@ void move_board(vector<vector<int>>& map, int dir)
             for (int i = 0; i < N; i++) 
             {
                 if (map[i][j] != 0) 
+                {
                     q.push(map[i][j]);
+                }
                 map[i][j] = 0; 
             }
 
-            int idx = 0;
+            int index = 0;
             while (!q.empty()) 
             {
                 int data = q.front();
                 q.pop();
 
-                if (map[idx][j] == 0) 
+                if (map[index][j] == 0) 
                 { 
-                    map[idx][j] = data;
+                    map[index][j] = data;
                 }
-                else if (map[idx][j] == data) 
+                else if (map[index][j] == data) 
                 { 
-                    map[idx][j] *= 2;
-                    idx++; 
+                    map[index][j] *= 2;
+                    index++; 
                 }
                 else 
                 { 
-                    idx++;
-                    map[idx][j] = data;
+                    index++;
+                    map[index][j] = data;
                 }
             }
         }
     }
-    else if (dir == 1) 
+    else if (dir == 1) // 아래
     { 
         for (int j = 0; j < N; j++)
         {
@@ -53,34 +55,36 @@ void move_board(vector<vector<int>>& map, int dir)
             for (int i = N - 1; i >= 0; i--)
             { 
                 if (map[i][j] != 0)
+                {
                     q.push(map[i][j]);
+                }
                 map[i][j] = 0;
             }
 
-            int idx = N - 1;
+            int index = N - 1;
             while (!q.empty()) 
             {
                 int data = q.front();
                 q.pop();
 
-                if (map[idx][j] == 0) 
+                if (map[index][j] == 0) 
                 {
-                    map[idx][j] = data;
+                    map[index][j] = data;
                 }
-                else if (map[idx][j] == data) 
+                else if (map[index][j] == data) 
                 {
-                    map[idx][j] *= 2;
-                    idx--;
+                    map[index][j] *= 2;
+                    index--;
                 }
                 else 
                 {
-                    idx--;
-                    map[idx][j] = data;
+                    index--;
+                    map[index][j] = data;
                 }
             }
         }
     }
-    else if (dir == 2) 
+    else if (dir == 2) // 왼쪽
     { 
         for (int i = 0; i < N; i++)
         {
@@ -88,34 +92,36 @@ void move_board(vector<vector<int>>& map, int dir)
             for (int j = 0; j < N; j++) 
             {
                 if (map[i][j] != 0) 
+                {
                     q.push(map[i][j]);
+                }
                 map[i][j] = 0;
             }
 
-            int idx = 0;
+            int index = 0;
             while (!q.empty()) 
             {
                 int data = q.front();
                 q.pop();
 
-                if (map[i][idx] == 0) 
+                if (map[i][index] == 0) 
                 {
-                    map[i][idx] = data;
+                    map[i][index] = data;
                 }
-                else if (map[i][idx] == data) 
+                else if (map[i][index] == data) 
                 {
-                    map[i][idx] *= 2;
-                    idx++;
+                    map[i][index] *= 2;
+                    index++;
                 }
                 else 
                 {
-                    idx++;
-                    map[i][idx] = data;
+                    index++;
+                    map[i][index] = data;
                 }
             }
         }
     }
-    else if (dir == 3) 
+    else if (dir == 3) // 오른쪽 
     { 
         for (int i = 0; i < N; i++) 
         {
@@ -123,28 +129,31 @@ void move_board(vector<vector<int>>& map, int dir)
             for (int j = N - 1; j >= 0; j--) 
             { 
                 if (map[i][j] != 0) 
+                {
                     q.push(map[i][j]);
+                }
                 map[i][j] = 0;
             }
 
-            int idx = N - 1;
+            int index = N - 1;
             while (!q.empty()) 
             {
                 int data = q.front();
                 q.pop();
 
-                if (map[i][idx] == 0) 
+                if (map[i][index] == 0) 
                 {
-                    map[i][idx] = data;
+                    map[i][index] = data;
                 }
-                else if (map[i][idx] == data) 
+                else if (map[i][index] == data) 
                 {
-                    map[i][idx] *= 2;
-                    idx--;
+                    map[i][index] *= 2;
+                    index--;
                 }
-                else {
-                    idx--;
-                    map[i][idx] = data;
+                else 
+                {
+                    index--;
+                    map[i][index] = data;
                 }
             }
         }
@@ -153,9 +162,12 @@ void move_board(vector<vector<int>>& map, int dir)
 
 void dfs(vector<vector<int>> map, int length)
 {
-    if (length == 5) {
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
+    if (length == 5) 
+    {
+        for (int i = 0; i < N; i++) 
+        {
+            for (int j = 0; j < N; j++) 
+            {
                 answer = max(answer, map[i][j]);
             }
         }
