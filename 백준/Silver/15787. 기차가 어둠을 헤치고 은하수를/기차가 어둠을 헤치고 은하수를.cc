@@ -29,7 +29,6 @@ int main()
             {
                 arr[train] &= ~(1 << seat);
             }
-            //cout << train << " : " << arr[train] << '\n';
         }
         else if(order==3)
         {
@@ -46,7 +45,6 @@ int main()
 
     for (int i = 1; i <= N; i++)
     {
-        //cout << i << " : " << arr[i] << '\n';
         answer[arr[i]]++;
     }
 
