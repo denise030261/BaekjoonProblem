@@ -1,44 +1,42 @@
 #include <iostream>
+#include <climits>
 
 using namespace std;
 
 int N, M;
-int moveX[4] = { 0,0,-1,1 };
-int moveY[4] = { -1,1,0,0 };
-int arr[501][501];
-bool visited[501][501];
+int dx[4] = { 0,0,-1,1 };
+int dy[4] = { -1,1,0,0 };
+int arr[500][500];
+bool visited[500][500];
 int answer = 0;
 int preanswer = 0;
 int roote = 0;
 
 void dfs(int x,int y)
 {
-	visited[x][y] = true;
 	roote++;
 	preanswer+=arr[x][y];
 
 	if (roote == 4)
 	{
-		if (preanswer > answer)
-		{
-			answer = preanswer;
-		}
+		answer = max(answer, preanswer);
 		return;
 	}
 
 	for (int i = 0; i < 4; i++)
 	{
-		int dx = x + moveX[i];
-		int dy = y + moveY[i];
+		int next_x = x + dx[i];
+		int next_y = y + dy[i];
 
-		if (dx > 0 &&dx <= N && dy > 0 && dy<=M)
+		if (next_x >= 0 && next_x < N && next_y >= 0 && next_y <M)
 		{
-			if (!visited[dx][dy])
+			if (!visited[next_x][next_y])
 			{
-				dfs(dx, dy);
-				visited[dx][dy] = false;
+				visited[next_x][next_y] = true;
+				dfs(next_x, next_y);
+				visited[next_x][next_y] = false;
 				roote--;
-				preanswer -= arr[dx][dy];
+				preanswer -= arr[next_x][next_y];
 			}
 		}
 	}
@@ -50,20 +48,21 @@ int main()
 
 	cin >> N >> M;
 
-	for (int i = 1; i <= N; i++)
+	for (int i = 0; i < N; i++)
 	{
-		for (int j = 1; j <= M; j++)
+		for (int j = 0; j < M; j++)
 		{
 			cin >> arr[i][j];
 		}
 	}
 
-	for (int i = 1; i <= N; i++)
+	for (int i = 0; i < N; i++)
 	{
-		for (int j = 1; j <= M; j++)
+		for (int j = 0; j < M; j++)
 		{
 			if (!visited[i][j])
 			{
+				visited[i][j] = true;
 				dfs(i, j);
 				visited[i][j] = false;
 				roote--;
@@ -72,30 +71,29 @@ int main()
 		}
 	}
 
-	for (int i = 1; i <= N; i++)
+	for (int i = 0; i < N; i++)
 	{
-		for (int j = 1; j <= M; j++)
+		for (int j = 0; j < M; j++)
 		{
 			roote = 0;
 			preanswer = 0;
 
-			if (!((i == 1 && j == 1) || (i == 1 && j == M)) || (i == N && j == 1) || (i == N && j == M))
+			if (!((i == 0 && j == 0) || (i == 0 && j == M-1)) || (i == N-1 && j == 0) || (i == N-1 && j == M-1))
 			{
-				int Min = 999;
+				int Min = INT_MAX;
 				preanswer += arr[i][j];
 				roote++;
 
 				for (int k = 0; k < 4; k++)
 				{
-					int dx = i + moveX[k];
-					int dy = j + moveY[k];
+					int next_x = i + dx[k];
+					int next_y = j + dy[k];
 
-					if (dx > 0 && dx <= N && dy > 0 && dy <= M)
+					if (next_x >= 0 && next_x < N && next_y >= 0 && next_y < M)
 					{
-						if (Min > arr[dx][dy])
-							Min = arr[dx][dy];
+						Min = min(Min, arr[next_x][next_y]);
 
-						preanswer += arr[dx][dy];
+						preanswer += arr[next_x][next_y];
 						roote++;
 					}
 				}
@@ -105,8 +103,7 @@ int main()
 					preanswer -= Min;
 				}
 
-				if (answer < preanswer)
-					answer = preanswer;
+				answer = max(answer, preanswer);
 			}
 		}
 	}
