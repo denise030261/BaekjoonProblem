@@ -1,64 +1,58 @@
 #include <iostream>
-#include <algorithm>
-#include<vector>
-#include<queue>
-#define INF 999999999
+#include <queue>
+#include <vector>
+#include <climits>
 
 using namespace std;
-
-int N, M, targetStart;
-
-vector<pair<int, int> > arr[1001]; 
-int dist[1001]; 
-
-void dijkstra(int dijStart)
-{
-	priority_queue<pair<int, int>>pq;
-	pq.push({ 0,dijStart });
-
-	dist[dijStart]=0;
-
-	while (!pq.empty())
-	{
-		int currentMoney = -pq.top().first; //현재 노드까지의 비용
-        int currentNode = pq.top().second; // 현재 노드
-        pq.pop();
-        
-        if(dist[currentNode]< currentMoney) // 이미 최단경로를 체크한 노드인 경우 패스
-            continue;
-        
-        for(int i=0; i< arr[currentNode].size(); i++)
-        {
-            int cost = currentMoney + arr[currentNode][i].second; // 거쳐서 가는 노드의 비용을 계산
-                                                  // 현재노드까지 비용 + 다음 노드 비용
-            if(cost<dist[arr[currentNode][i].first]) // 비용이 더 작다면 최단경로 테이블 값을 갱신.
-            {
-                dist[arr[currentNode][i].first]=cost;
-                pq.push(make_pair(-cost, arr[currentNode][i].first));
-            }
-        }
-	}
-}
+vector<pair<int,int>> v[100001];
+int dist[100001] = { 0, };
+bool visited[100001] = { 0, };
 
 int main()
 {
-	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+    ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+    int N, M;
+    int startN, endN;
 
-	int N, M,targetStart,targetEnd;
-	cin >> N >> M;
+    cin >> N >> M;
+    for (int i = 1; i <= N; i++)
+    {
+        dist[i] = INT_MAX;
+    }
+    for (int i = 0; i < M; i++)
+    {
+        int start, end, cost;
+        cin >> start >> end >> cost;
+        v[start].push_back({ end,cost });
+    }
+    cin >> startN >> endN;
 
-	int start, end, money;
-	for (int i = 0; i < M; i++)
-	{
-		cin >> start >> end >> money;
-		arr[start].push_back({ end,money });
-	}
+    int answer = INT_MAX;
+    priority_queue<pair<int, int>> pq;
+    pq.push({ -0,startN });
 
-	fill(dist, dist + 1001, INF);
+    while (!pq.empty())
+    {
+        int node = pq.top().second;
+        int cost = -pq.top().first;
+        pq.pop();
 
-	cin >> targetStart >> targetEnd;
+        if (node == endN)
+        {
+            answer = min(answer, cost);
+            break;
+        }
 
-	dijkstra(targetStart);
-
-	cout << dist[targetEnd];
+        for (int i = 0; i < v[node].size(); i++)
+        {
+            int next_node = v[node][i].first;
+            int next_cost = v[node][i].second + cost;
+            if (dist[next_node]> next_cost)
+            {
+                dist[next_node] = next_cost;
+                pq.push({ -next_cost, next_node });
+            }
+        }
+    }
+    cout << answer;
 }
