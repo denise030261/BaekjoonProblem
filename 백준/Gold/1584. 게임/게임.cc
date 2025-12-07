@@ -89,7 +89,6 @@ int main()
         }
         visited[x][y] = true;
 
-        //cout << x << ' ' << y << ' ' << cost << '\n';
         if (x == 500 && y == 500)
         {
             answer = min(answer, cost);
