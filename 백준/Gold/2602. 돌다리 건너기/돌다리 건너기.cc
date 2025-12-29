@@ -38,7 +38,7 @@ int main()
         {
             dpAngel[i][0] = dpAngel[i - 1][0] + 1;
         }
-        else 
+        else
         {
             dpAngel[i][0] = dpAngel[i - 1][0];
         }
@@ -49,7 +49,7 @@ int main()
             {
                 dpDevil[i][j] = dpDevil[i - 1][j] + dpAngel[i - 1][j - 1];
             }
-            else if(strDevil[i] != magic[j])
+            else if (strDevil[i] != magic[j])
             {
                 dpDevil[i][j] = dpDevil[i - 1][j];
             }
@@ -64,26 +64,6 @@ int main()
             }
         }
     }
-
-    /*cout << "Devil\n";
-    for (int i = 0; i < M; i++)
-    {
-        for (int j = 0; j < N; j++)
-        {
-            cout << dpDevil[i][j] << ' ';
-        }
-        cout << "   /   ";
-    }
-    
-    cout << "Angel\n";
-    for (int i = 0; i < M; i++)
-    {
-        for (int j = 0; j < N; j++)
-        {
-            cout << dpAngel[i][j] << ' ';
-        }
-        cout << "   /   ";
-    }*/
 
     cout << dpDevil[M-1][N-1] + dpAngel[M - 1][N - 1];
 }
