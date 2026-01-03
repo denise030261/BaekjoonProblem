@@ -26,16 +26,11 @@ int main()
         {
             dp[i] = sum[i - a] % 1000;
         }
-        else if (i - b == 0)
-        {
-            dp[i] = (sum[i - a] - 1+1000)%1000;
-        }
         else
         {
             dp[i] = (sum[i - a] - sum[i - b]+1000)%1000;
         }
         sum[i] = (sum[i - 1] + dp[i]) % 1000;
-
     }
 
     if (N - d < 0)
