@@ -116,33 +116,8 @@ void dfs(int index)
         same[i] = true;
 
         answer = min(answer, calculate());
-        /*if (answer > calculate())
-        {
-            answer = calculate();
-
-            cout << "same : ";
-            for (int j = 1; j <= N; j++)
-            {
-                if (same[j])
-                {
-                    cout << j << ' ';
-                }
-            }
-            cout << '\n';
-
-            cout << "not same : ";
-            for (int j = 1; j <= N; j++)
-            {
-                if (!same[j])
-                {
-                    cout << j << ' ';
-                }
-            }
-            cout << '\n';
-        }*/
         dfs(i + 1);
         same[i] = false;
-        // 다른 사람 포함
     }
 }
 
