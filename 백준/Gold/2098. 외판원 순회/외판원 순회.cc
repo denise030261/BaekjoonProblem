@@ -18,10 +18,10 @@ int dfs(int current, int visited)
             return 17000000;
 
         return arr[current][1]; 
-    }
+    } // 모두 다 방문 했을 때
 
     if (dp[current][visited] != -1) 
-        return dp[current][visited];
+        return dp[current][visited]; // 이미 계산을 했을 때
 
     dp[current][visited] = 17000000;
     for (int i = 1; i <= N; i++)
