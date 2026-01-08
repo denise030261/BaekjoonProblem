@@ -36,9 +36,8 @@ int main()
         for (int j = 0; j < n; j++)
         {
             arr[i][j] = sqrt(pow((v[i].first - v[j].first), 2) + pow((v[i].second - v[j].second), 2));
-            //cout << arr[i][j] << ' ';
         }
-        //cout << '\n';
+
     }
 
     priority_queue<pair<double, int>,vector<pair<double, int>>, greater<pair<double, int>>> pq;
@@ -55,7 +54,6 @@ int main()
         if (visited[current])
             continue;
     
-        //cout << current << ' ' << cost << '\n';
         answer += cost;
         visited[current] = true;
 
@@ -63,11 +61,9 @@ int main()
         {
             if (!visited[i])
             {
-                //cout << i << ' ' << arr[current][i] << '\n';
                 pq.push({ (arr[current][i]),i });
             }
         }
-        //cout << "-----------------\n";
     }
 
     cout << std::fixed << setprecision(2);
