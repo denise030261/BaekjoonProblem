@@ -36,10 +36,8 @@ int main() //크기가 작고 색이 다른 공
         int cost = q.front().second;
         q.pop();
 
-        //cout << nums[0] << ' ' << nums[1] << ' ' << nums[2] << ' ' << cost << '\n';
         if ((cost > answer))
         {
-            //cout << "?";
             continue;
         }
 
@@ -61,7 +59,6 @@ int main() //크기가 작고 색이 다른 공
             
             if (!visited[abs(temp[0])][abs(temp[1])][abs(temp[2])])
             {
-                //cout << temp[0] << ' ' << temp[1] << ' ' << temp[2] << '\n';
                 q.push({ temp,cost + 1 });
                 visited[abs(temp[0])][abs(temp[1])][abs(temp[2])] = true;
             }
