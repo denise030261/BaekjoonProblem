@@ -10,20 +10,6 @@ int dx[4] = { 0,0,1,-1 };
 int dy[4] = { 1,-1,0,0 };
 int N;
 
-void print()
-{
-    for (int i = 0; i < N; i++)
-    {
-        for (int j = 0; j < N; j++)
-        {
-            cout << map[i][j];
-        }
-        cout << '\n';
-    }
-
-    cout << '\n';
-}
-
 void calculate(int x, int y)
 {
     int sum = 1;
@@ -55,11 +41,6 @@ void calculate(int x, int y)
             }
         }
     }
-    /*if (answer < sum)
-    {
-        cout << sum << '\n';
-        print();
-    }*/
     answer = max(answer, sum);
 
     sum = 1;
@@ -90,11 +71,6 @@ void calculate(int x, int y)
             }
         }
     }
-    /*if (answer < sum)
-    {
-        cout << sum << '\n';
-        print();
-    }*/
     answer = max(answer, sum);
 }
 
