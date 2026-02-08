@@ -1,40 +1,59 @@
 #include <iostream>
-#include <algorithm>
+#include <queue>
+#include <vector>
 
 using namespace std;
 
 int main()
 {
-	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+    ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+    int N;
+    int arr[100000][3] = { 0, };
+    int answer[3] = { 0, };
+    int prev[3] = { 0, };
+    cin >> N;
 
-	int arrMin[3] = { 0, };
-	int arrMax[3] = { 0, };
-	int num[3];
+    for (int i = 0; i < N; i++)
+    {
+        cin >> arr[i][0] >> arr[i][1] >> arr[i][2];
+    } 
 
-	int N,a,b,c;
-	cin >> N;
+    prev[0] = arr[0][0]; prev[1] = arr[0][1]; prev[2] = arr[0][2];
 
-	for (int i = 1; i <= N; i++)
-	{
-		cin >> num[0] >> num[1] >> num[2];
+    for (int i = 1; i < N; i++)
+    {
+        answer[0] = max(prev[0], prev[1]) + arr[i][0];
+        answer[1] = max(prev[0], max(prev[1], prev[2])) + arr[i][1];
+        answer[2] = max(prev[2], prev[1]) + arr[i][2];
 
-		a = arrMin[0];
-		b = arrMin[1];
-		c = arrMin[2];
+        prev[0] = answer[0]; prev[1] = answer[1]; prev[2] = answer[2];
+    }
 
-		arrMin[0] = min(a, b) + num[0];
-		arrMin[2] = min(b, c) + num[2];
-		arrMin[1] = min(min(a, b), c) + num[1];
+    if (N == 1)
+    {
+        cout << max(prev[0], max(prev[1], prev[2])) << ' ';
+    }
+    else
+    {
+        cout << max(answer[0], max(answer[1], answer[2])) << ' ';
+    }
+    prev[0] = arr[0][0]; prev[1] = arr[0][1]; prev[2] = arr[0][2];
 
-		a = arrMax[0];
-		b = arrMax[1];
-		c = arrMax[2];
+    for (int i = 1; i < N; i++)
+    {
+        answer[0] = min(prev[0], prev[1]) + arr[i][0];
+        answer[1] = min(prev[0], min(prev[1], prev[2])) + arr[i][1];
+        answer[2] = min(prev[2], prev[1]) + arr[i][2];
 
-		arrMax[0] = max(a, b) + num[0];
-		arrMax[2] = max(b, c) + num[2];
-		arrMax[1] = max(max(a, b), c) + num[1];
+        prev[0] = answer[0]; prev[1] = answer[1]; prev[2] = answer[2];
+    }
 
-	}
-
-	cout << max(max(arrMax[0],arrMax[1]),arrMax[2]) << ' ' << min(min(arrMin[0], arrMin[1]), arrMin[2]);
+    if (N == 1)
+    {
+        cout << min(prev[0], min(prev[1], prev[2]));
+    }
+    else
+    {
+        cout << min(answer[0], min(answer[1], answer[2]));
+    }
 }
