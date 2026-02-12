@@ -38,3 +38,6 @@
 
 <p>둘째 줄에는 1번 자리부터 <mjx-container class="MathJax" jax="CHTML" style="font-size: 109%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D44B TEX-I"></mjx-c></mjx-mi></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>X</mi></math></mjx-assistive-mml><span aria-hidden="true" class="no-mathjax mjx-copytext">\(X\)</span></mjx-container>번 자리까지 순서대로 각 자리를 사용한 사람의 수를 띄어쓰기 간격으로 출력한다.</p>
 
+### 문제 풀이
+<p> 이 문제는 그리디의 문제를 풀어야하지만 비어있는 자리에 번호가 가장 작은 자리부터 채워야한다. 그렇기 때문에 기존의 최소한의 컴퓨터의 개수를 다르게 구해야한다. 일단 시간순으로 오름차순으로 정렬한 뒤에 컴퓨터의 수를 센다. 이 때, 빈 자리의 인덱스가 작은거터 구해야하므로 사용 시간이 끝났을 때 우선순위 큐를 따로 만들어 인덱스를 저장해놓는다. 그래서 그 인덱스 중에서 가장 작은 인덱스를 현재 사람한테 배치한다. 이렇게 하나의 우선순위 큐는 현재 사용하고 있는 중인 사람의 끝 시간과 인덱스를 다른 하나는 비어있는 인덱스를 저장하여 푼다. </p>
+
