@@ -1,82 +1,93 @@
-#include <algorithm>
-#include <cmath>
 #include <iostream>
+#include <climits>
 #include <vector>
-#include <utility>
+#include <cmath>
 
 using namespace std;
 
+int answer = INT_MAX;
 int N, M;
-int answer= 9999999;
-
-vector<pair<int,int>> house;
+int arr[50][50] = { 0, };
+int chicken_dist[13][100] = { 0, }; // 치킨집에서 집으로부터의 거리
+vector<pair<int, int>> house;
 vector<pair<int, int>> chicken;
-vector<pair<int, int>> location;
 
-bool visited[13] = {0,};
+int dx[4] = { 0,0,1,-1 };
+int dy[4] = { 1,-1,0,0 };
 
-int calculate(pair<int, int> a, pair<int, int> b)
+void dfs(vector<int> v,int index)
 {
-	return abs(a.first - b.first) + abs(a.second - b.second);
-}
+    if (v.size() == M)
+    {
+        int sum = 0;
+        for (int i = 0; i < house.size(); i++)
+        {
+            int num = INT_MAX;
+            for (int j = 0; j < v.size(); j++)
+            {
+                num = min(num, chicken_dist[v[j]][i]);
+            }
+            sum += num;
+        }
+        answer = min(answer, sum);
+        return;
+    }
 
-void location_position(int order,int length)
-{
-	if (length == M)
-	{
-		int result = 0;
-		for (int i = 0; i < house.size(); i++)
-		{
-			int minNum=9999999;
-			for (int j = 0; j < location.size(); j++)
-			{
-				minNum = min(minNum, calculate(location[j], house[i]));
-			}
-			result += minNum;
-		}
-		
-		answer = min(answer,result);
-		return;
-	}
-
-	for (int i = order; i < chicken.size(); i++)
-	{
-		if (visited[i] == true)
-			continue;
-
-		visited[i] = true;
-		location.push_back(make_pair(chicken[i].first, chicken[i].second));
-		location_position(i, length + 1);
-		visited[i] = false;
-		location.pop_back();
-	}
+    for (int i = index; i < chicken.size(); i++)
+    {
+        v.push_back(i);
+        dfs(v, i + 1);
+        v.pop_back();
+    }
 }
 
 int main()
 {
-	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+    ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+    cin >> N >> M;
 
-	cin >> N >> M;
+    for (int i = 0; i < N; i++)
+    {
+        for (int j = 0; j < N; j++)
+        {
+            cin >> arr[i][j];
+            
+            if (arr[i][j] == 1)
+            {
+                house.push_back({ i,j });
+            }
+            else if (arr[i][j] == 2)
+            {
+                chicken.push_back({ i,j });
+            }
+        }
+    }
 
-	int num;
-	for (int i = 0; i < N; i++)
-	{
-		for (int j = 0; j < N; j++)
-		{
-			cin >> num;
+    for (int i = 0; i < chicken.size(); i++)
+    {
+        for (int j = 0; j < house.size(); j++)
+        {
+            chicken_dist[i][j] = INT_MAX;
+        }
+    }
 
-			if (num == 1)
-			{
-				house.push_back(make_pair(i + 1, j + 1));
-			}
-			else if (num == 2)
-			{
-				chicken.push_back(make_pair(i + 1, j + 1));
-			}
-		}
-	}
+    for (int i = 0; i < chicken.size(); i++)
+    {
+        int chicken_x = chicken[i].first;
+        int chicken_y = chicken[i].second;
 
-	location_position(0, 0);
+        for (int j = 0; j < house.size(); j++)
+        {
+            int house_x = house[j].first;
+            int house_y = house[j].second;
 
-	cout << answer;
+            int dist = abs(chicken_x - house_x) + abs(chicken_y - house_y);
+            chicken_dist[i][j] = dist;
+        }
+    }
+
+    vector<int> v;
+    dfs(v, 0);
+
+    cout << answer;
 }
