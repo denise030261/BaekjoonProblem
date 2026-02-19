@@ -1,61 +1,137 @@
 #include <iostream>
 #include <vector>
 #include <queue>
-#include <algorithm>
 #include <cstring>
-using namespace std;
-const int INF = 987654321;
-int N, E, v1, v2, res = INF;
-int sToV1, sToV2, V1ToV2, V1ToN, V2ToN;
-vector<pair<int, int>> v[801]; // v[a] = (b,c) : a에서 b까지 c의 거리로 이동 가능
-int dist[801];
+#include <string>
+#include <climits>
 
-void dijk(int start)
-{
-	for (int i = 0; i <= N; i++) dist[i] = INF;
-	dist[start] = 0;
-	priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> q;
-	q.push({ 0,start }); // 현재까지 거리, 현재 위치
-	while (!q.empty()) {
-		int cur = q.top().second;
-		int curDist = q.top().first;
-		q.pop();
-		for (int i = 0; i < v[cur].size(); i++) {
-			int next = v[cur][i].first;
-			int nextDist = v[cur][i].second;
-			if (dist[next] > curDist + nextDist) {
-				dist[next] = curDist + nextDist;
-				q.push({ dist[next],next });
-			}
-		}
-	}
-}
+using namespace std;
 
 int main()
 {
-	cin >> N >> E;
-	while (E--) {
-		int a, b, c;
-		cin >> a >> b >> c;
-		v[a].push_back({ b,c });
-		v[b].push_back({ a,c });
-	}
-	cin >> v1 >> v2;
+    ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+    int N, E;
+    int dist[801][801] = { 0, };
+    vector<pair<int, int>> v[801];
+    
+    cin >> N >> E;
 
-	dijk(1);
-	sToV1 = dist[v1];
-	sToV2 = dist[v2];
+    for (int i = 0; i < E; i++)
+    {
+        int a, b, c;
+        cin >> a >> b >> c;
+        v[a].push_back({ b,c });
+        v[b].push_back({ a,c });
+    }
 
-	dijk(v1);
-	V1ToV2 = dist[v2];
-	V1ToN = dist[N];
+    for (int i = 0; i <= N; i++)
+    {
+        for (int j = 0; j <= N; j++)
+        {
+            dist[i][j] = 98765432;
+        }
+    }
 
-	dijk(v2);
-	V2ToN = dist[N];
+    int v1, v2;
+    cin >> v1 >> v2;
 
+    priority_queue<pair<int, int>> pq;
+    pq.push({ -0,1 });
+    bool visited[801] = { 0, };
+    while (!pq.empty())
+    {
+        int cur = pq.top().second;
+        int cost = -pq.top().first;
+        pq.pop();
 
-	res = min(res, sToV1 + V1ToV2 + V2ToN);
-	res = min(res, sToV2 + V1ToV2 + V1ToN);
-	if (V1ToV2 == INF || res == INF) cout << -1;
-	else cout << res;
+        if (visited[cur])
+        {
+            continue;
+        }
+        visited[cur] = true;
+        dist[1][cur] = min(dist[1][cur], cost);
+
+        for (int i = 0; i < v[cur].size(); i++)
+        {
+            int next = v[cur][i].first;
+            int next_cost = v[cur][i].second;
+
+            if (!visited[next])
+            {
+                pq.push({ -(next_cost + cost),next });
+            }
+        }
+    }
+
+    pq.push({ -0,v1 });
+    for (int i = 1; i <= N; i++)
+    {
+        visited[i] = false;
+    }
+    while (!pq.empty())
+    {
+        int cur = pq.top().second;
+        int cost = -pq.top().first;
+        pq.pop();
+
+        if (visited[cur])
+        {
+            continue;
+        }
+        visited[cur] = true;
+        dist[v1][cur] = min(dist[v1][cur], cost);
+        dist[cur][v1] = min(dist[cur][v1], cost);
+
+        for (int i = 0; i < v[cur].size(); i++)
+        {
+            int next = v[cur][i].first;
+            int next_cost = v[cur][i].second;
+
+            if (!visited[next])
+            {
+                pq.push({ -(next_cost + cost),next });
+            }
+        }
+    }
+
+    pq.push({ -0,N });
+    for (int i = 1; i <= N; i++)
+    {
+        visited[i] = false;
+    }
+    while (!pq.empty())
+    {
+        int cur = pq.top().second;
+        int cost = -pq.top().first;
+        pq.pop();
+
+        if (visited[cur])
+        {
+            continue;
+        }
+        visited[cur] = true;
+        dist[N][cur] = min(dist[N][cur], cost);
+        dist[cur][N] = min(dist[cur][N], cost);
+
+        for (int i = 0; i < v[cur].size(); i++)
+        {
+            int next = v[cur][i].first;
+            int next_cost = v[cur][i].second;
+
+            if (!visited[next])
+            {
+                pq.push({ -(next_cost + cost),next });
+            }
+        }
+    }
+
+    int answer = min(dist[1][v1] + dist[v1][v2] + dist[v2][N], dist[1][v2] + dist[v2][v1] + dist[v1][N]);
+    if (answer >= 98765432)
+    {
+        cout << -1;
+    }
+    else
+    {
+        cout << answer;
+    }
 }
