@@ -9,27 +9,6 @@ int arr[5][5] = { 0, };
 void calculate(int A[5][5], int B[5][5], int C[5][5])
 {
     int temp[5][5] = { 0, };
-
-    /*for (int i = 0; i < N; i++)
-    {
-        for (int j = 0; j < N; j++)
-        {
-            cout << A[i][j] << ' ';
-        }
-        cout << '\n';
-    }
-    cout << '\n';
-
-    for (int i = 0; i < N; i++)
-    {
-        for (int j = 0; j < N; j++)
-        {
-            cout << B[i][j] << ' ';
-        }
-        cout << '\n';
-    }
-    cout << '\n';*/
-
     for (int i = 0; i < N; i++)
     {
         for (int j = 0; j < N; j++)
@@ -48,29 +27,23 @@ void calculate(int A[5][5], int B[5][5], int C[5][5])
         for (int j = 0; j < N; j++)
         {
             C[i][j] = temp[i][j]%1000;
-            //cout << C[i][j] << ' ';
         }
-        //cout << '\n';
     }
-    //cout << '\n';
 }
 
 void divAndConq(long long int cur, int cal[5][5])
 {
     if (cur == 1)
     {
-        //cout << "first : \n";
         calculate(arr, cal, cal);
         return;
     }
 
     divAndConq(cur / 2, cal);
 
-    //cout << "calculate : \n";
     calculate(cal, cal, cal);
     if (cur % 2 == 1)
     {
-        //cout << "odd : \n";
         calculate(cal, arr, cal);
     }
 }
