@@ -17,7 +17,7 @@ int main()
         return 0;
     }
 
-    priority_queue<pair<int,int>> pq;
+    queue<pair<int,int>> pq;
     pq.push({ 0,N });
 
     int answer_num = INF;
@@ -30,8 +30,8 @@ int main()
    
     while (!pq.empty())
     {
-        int num = pq.top().second;
-        int cost = -pq.top().first;
+        int num = pq.front().second;
+        int cost = -pq.front().first;
         visited[num] = cost;
         pq.pop();
         
