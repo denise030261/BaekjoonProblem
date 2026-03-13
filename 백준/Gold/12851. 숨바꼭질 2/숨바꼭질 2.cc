@@ -63,12 +63,9 @@ int main()
                 pq.push({ -(cost + 1), num + 1 });
             }
         }
-        if (num - 1 > 0)
+        if (visited[num - 1] >= cost + 1)
         {
-            if(visited[num-1]>=cost+1)
-            {
-                pq.push({ -(cost + 1), num - 1 });
-            }
+            pq.push({ -(cost + 1), num - 1 });
         }
     }
 
