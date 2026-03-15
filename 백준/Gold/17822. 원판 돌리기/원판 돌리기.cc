@@ -20,11 +20,11 @@ int main()
         }
     }
 
-    // 회전
     while (T != 0)
     {
         int x, d, k; // x : 배수, d : 방향 (0:시계, 1:반시계), k : 몇 칸
         cin >> x >> d >> k;
+        // 회전 돌리기
         for (int i = x-1; i < N; i += x)
         {
             int temp[50] = { 0, };
@@ -46,18 +46,7 @@ int main()
             {
                 arr[i][j] = temp[j];
             }
-        } // 회전 돌리기
-
-        /*cout << "회전하기\n";
-        for (int i = 0; i < N; i++)
-        {
-            for (int j = 0; j < M; j++)
-            {
-                cout << arr[i][j] << ' ';
-            }
-            cout << '\n';
-        }
-        cout << '\n';*/
+        } 
 
         // 인접한 수 없애기
         bool exist = false;
@@ -101,6 +90,7 @@ int main()
             arr[rem_x][rem_y] = -1;
         }
 
+        // 인접하지 않을 경우에 평균 구하기
         float sum = 0;
         float minus = 0;
         for (int i = 0; i < N; i++)
@@ -120,7 +110,6 @@ int main()
 
         if (!exist) // 인접한 수가 없으면 평균보다 크면 -1, 작으면 +1
         {
-            //cout << sum << " 인접한 수가 없습니다\n";
             for (int i = 0; i < N; i++)
             {
                 for (int j = 0; j < M; j++)
@@ -141,16 +130,6 @@ int main()
                 }
             }
         }
-        /*cout << "인접한 수\n";
-        for (int i = 0; i < N; i++)
-        {
-            for (int j = 0; j < M; j++)
-            {
-                cout << arr[i][j] << ' ';
-            }
-            cout << '\n';
-        }
-        cout << '\n';*/
         T--;
     }
 
@@ -159,7 +138,6 @@ int main()
     {
         for (int j = 0; j < M; j++)
         {
-            //cout << arr[i][j] << ' ';
             if (arr[i][j] == -1)
             {
                 continue;
@@ -167,7 +145,6 @@ int main()
 
             answer += arr[i][j];
         }
-       // cout << '\n';
     }
 
     cout << answer;
