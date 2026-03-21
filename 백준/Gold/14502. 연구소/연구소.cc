@@ -55,7 +55,6 @@ void bfs()
             {
                 if (temp[next_x][next_y] == 0 && !visited[next_x][next_y])
                 {
-                    //cout << next_x << ' ' << next_y << ' ' << temp[next_x][next_y] << ' ' << visited[next_x][next_y] << '\n';
                     visited[next_x][next_y] = true;
                     temp[next_x][next_y] = 2;
                     q.push({ next_x,next_y });
@@ -82,7 +81,6 @@ void place(int index, int length)
 {
     if (length == 3)
     {
-        //cout << '\n';
         bfs();
         return;
     } // 벽 배치 완료
@@ -93,7 +91,6 @@ void place(int index, int length)
         int y = v[i].second;
         if (!placed[x][y])
         {
-            //cout << x << ' ' << y << '\n';
             placed[x][y] = true;
             arr[x][y] = 1;
             place(i + 1, length + 1);
