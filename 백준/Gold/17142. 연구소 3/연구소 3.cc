@@ -18,29 +18,24 @@ int area = 0;
 void infect()
 {
     int temp = area;
-    int map[50][50] = { 0, };
     for (int i = 0; i < N; i++)
     {
         for (int j = 0; j < N; j++)
         {
-            map[i][j] = arr[i][j];
             visited[i][j] = false;
         }
     }
 
     priority_queue<pair<int, pair<int, int>>> pq;
-    //cout << "활성화\n";
     for (int i = 0; i < placed_virus.size(); i++)
     {
         int index = placed_virus[i];
         int x = virus[index].first;
         int y = virus[index].second;
 
-        //cout << x << ' ' << y << '\n';
         pq.push({ -0,{x,y} });
     } // 바이러스 활성화
 
-    //cout << "현재 area : " << area << '\n';
     while (!pq.empty())
     {
         int second = -pq.top().first;
@@ -58,7 +53,6 @@ void infect()
             temp--;
         }
         visited[x][y] = true;
-        map[x][y] = second;
 
         if (temp == 0)
         {
@@ -80,15 +74,6 @@ void infect()
         }
     }
 
-    /*for (int i = 0; i < N; i++)
-    {
-        for (int j = 0; j < N; j++)
-        {
-            cout << map[i][j];
-        }
-        cout << '\n';
-    }
-    cout << '\n';*/
 }
 
 void place(int index)
