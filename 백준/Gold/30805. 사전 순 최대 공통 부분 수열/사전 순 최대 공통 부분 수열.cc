@@ -1,67 +1,82 @@
 #include <iostream>
+#include <deque>
 #include <vector>
 #include <algorithm>
 
 using namespace std;
 
-bool compare(pair<int, int> a, pair<int, int> b)
+bool compare(pair<int, pair<int, int>> a, pair<int, pair<int, int>> b)
 {
-	if (a.first == b.first)
-		return a.second < b.second;
-	return a.first > b.first;
+    if (a.first == b.first)
+    {
+        if (a.second.first == b.second.first)
+        {
+            return a.second.second < b.second.second;
+        }
+
+        return a.second.first < b.second.first;
+    }
+    return a.first > b.first;
 }
 
 int main()
 {
-	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-	vector<pair<int,int>> A;
-	vector<pair<int,int>> B;
-	int N, M, num;
+    ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+    int N, M;
+    int A[100] = { 0, };
+    int B[100] = { 0, };
 
-	cin >> N;
-	for (int i = 0; i < N; i++)
-	{
-		cin >> num;
-		A.push_back({ num,i });
-	}
-	cin >> M;
-	for (int i = 0; i < M; i++)
-	{
-		cin >> num;
-		B.push_back({ num,i });
-	}
-	
-	sort(A.begin(), A.end(), compare);
-	sort(B.begin(), B.end(), compare);
+    cin >> N;
+    for (int i = 0; i < N; i++)
+    {
+        cin >> A[i];
+    }
 
-	vector<int> answer;
-	int index_a = 0, index_b = 0, end_a = 0, end_b = 0;
-	while (index_a < N && index_b < M)
-	{
-		if (A[index_a].first == B[index_b].first)
-		{
-			if (end_a > A[index_a].second)
-				index_a++;
-			else if (end_b > B[index_b].second)
-				index_b++;
-			else
-			{
-				end_a = A[index_a].second;
-				end_b = B[index_b].second;
-				answer.push_back(A[index_a].first);
-				index_a++;
-				index_b++;
-			}
-		}
-		else if (A[index_a].first > B[index_b].first)
-			index_a++;
-		else
-			index_b++;
-	}
+    cin >> M;
+    for (int i = 0; i < M; i++)
+    {
+        cin >> B[i];
+    }
 
-	cout << answer.size() << '\n';
-	for (int i = 0; i < answer.size(); i++)
-	{
-		cout << answer[i] << ' ';
-	}
+    vector<pair<int, pair<int, int>>> v;
+    for (int i = 0; i < N; i++)
+    {
+        for (int j = 0; j < M; j++)
+        {
+            if (A[i] == B[j])
+            {
+                v.push_back({ A[i],{i,j} });
+            }
+        }
+    }
+
+    sort(v.begin(), v.end(), compare);
+
+    if (v.size() == 0)
+    {
+        cout << 0;
+        return 0;
+    }
+
+    vector<int> answer;
+    answer.push_back(v[0].first);
+    int answer_num = v[0].first;
+    int answer_Aidx = v[0].second.first;
+    int answer_Bidx = v[0].second.second;
+    for (int i = 1; i < v.size(); i++)
+    {
+        if (answer_num >= v[i].first && answer_Aidx<v[i].second.first && answer_Bidx<v[i].second.second)
+        {
+            answer.push_back(v[i].first);
+            answer_num = v[i].first;
+            answer_Aidx = v[i].second.first;
+            answer_Bidx = v[i].second.second;
+        }
+    }
+
+    cout << answer.size() << '\n';
+    for (int i = 0; i < answer.size(); i++)
+    {
+        cout << answer[i] << ' ';
+    }
 }
