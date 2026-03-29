@@ -52,6 +52,7 @@ int main()
                         possible = true;
                         end--;
                         circle = 1;
+                        break;
                     }
                 }
                 if (str[start + 1] == str[end] && !possible)
@@ -61,6 +62,7 @@ int main()
                         possible = true;
                         start++;
                         circle = 1;
+                        break;
                     }
                 }
                 
